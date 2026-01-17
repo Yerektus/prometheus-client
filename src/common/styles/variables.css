@@ -1,0 +1,9 @@
+:root {
+  --primary-color: #79e202;
+  --text-color: #181818;
+  --text-color-muted: #9c9c9c;
+  --secondary-text-color: #f2f4f7;
+  --box-color: #f5f5f5;
+
+  --control-height: 42px;
+}
