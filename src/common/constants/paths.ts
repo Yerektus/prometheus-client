@@ -1,4 +1,4 @@
 export const paths = {
   getDashboardPath: () => "/dashboard",
-  getSignInPath: () => "/sign-in",
+  getSignInPath: () => "/auth/sign-in",
 };
