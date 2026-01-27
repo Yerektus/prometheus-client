@@ -16,7 +16,12 @@ import { Input } from "@/common/components/ui/input";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+import { useMutation } from "@tanstack/react-query";
+import { loginUser } from "@/common/api/requests/auth/login-user";
 import { toast } from "sonner";
+import { buildHttpHandler } from "@/common/utils/build-http-error";
+import { useAuthStore } from "../../stores/auth-store";
+import { useNavigate } from "react-router-dom";
 
 const formSchema = z.object({
   email: z.email(),
@@ -31,22 +36,27 @@ export const LoginForm = () => {
       password: "",
     },
   });
+  const navigate = useNavigate();
+  const setAuth = useAuthStore((state) => state.setAuth);
 
-  const onSubmit = (data: z.infer<typeof formSchema>) => {
-    toast("You submitted the following values:", {
-      description: (
-        <pre className="bg-code text-code-foreground mt-2 w-[320px] overflow-x-auto rounded-md p-4">
-          <code>{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-      position: "bottom-right",
-      classNames: {
-        content: "flex flex-col gap-2",
-      },
-      style: {
-        "--border-radius": "calc(var(--radius)  + 4px)",
-      } as React.CSSProperties,
-    });
+  const loginMutation = useMutation({
+    mutationFn: async (data: { email: string; password: string }) =>
+      await loginUser(data),
+    onSuccess: (data) => {
+      toast.success("Пользователь был создан успешно!");
+      const [user, auth] = data;
+      setAuth(auth, user);
+      form.reset();
+
+      navigate("/dashboard");
+    },
+    onError: (error) => {
+      buildHttpHandler(error);
+    },
+  });
+
+  const onSubmit = async (data: z.infer<typeof formSchema>) => {
+    await loginMutation.mutateAsync(data);
   };
 
   return (
