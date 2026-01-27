@@ -21,11 +21,11 @@ export const routes: RouteObject[] = [
     element: <AuthGuardLayout />,
     children: [
       {
-        path: "/",
+        path: "dashboard",
         element: <NavigationLayout />,
         children: [
           {
-            path: "/dashboard",
+            path: "sensors",
             element: <DashboardView />,
           },
         ],
