@@ -1,6 +1,7 @@
 import { DashboardView } from "@/features/dashboard/view/dashboard-view";
 import { LoginView } from "../features/auth/view/login/login-view";
 import { createBrowserRouter, RouteObject } from "react-router-dom";
+import { NavigationLayout } from "@/common/layouts/navigation-/navigation-layout";
 
 export const routes: RouteObject[] = [
   {
@@ -8,8 +9,14 @@ export const routes: RouteObject[] = [
     element: <LoginView />,
   },
   {
-    path: "/dashboard",
-    element: <DashboardView />,
+    path: "/",
+    element: <NavigationLayout />,
+    children: [
+      {
+        path: "/dashboard",
+        element: <DashboardView />,
+      },
+    ],
   },
 ];
 
