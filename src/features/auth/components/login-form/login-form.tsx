@@ -49,7 +49,7 @@ export const LoginForm = () => {
       setAuth(auth, user);
       form.reset();
 
-      navigate(paths.getDashboardPath());
+      navigate(paths.getSensorsPath());
     },
     onError: (error) => {
       buildHttpHandler(error);
