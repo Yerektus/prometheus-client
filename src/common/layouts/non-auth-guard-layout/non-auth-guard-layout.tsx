@@ -10,7 +10,7 @@ export const NonAuthGuardLayout = () => {
   useEffect(() => {
     if (getToken()) {
       console.log("da");
-      navigate(paths.getDashboardPath(), {
+      navigate(paths.getSensorsPath(), {
         replace: true,
       });
     }
