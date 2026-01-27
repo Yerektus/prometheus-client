@@ -44,7 +44,7 @@ export const LoginForm = () => {
     mutationFn: async (data: { email: string; password: string }) =>
       await loginUser(data),
     onSuccess: (data) => {
-      toast.success("Пользователь был создан успешно!");
+      toast.success("Вы успешно авторизованны!");
       const [user, auth] = data;
       setAuth(auth, user);
       form.reset();
