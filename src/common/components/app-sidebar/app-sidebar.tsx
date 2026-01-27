@@ -1,4 +1,4 @@
-import { Calendar, Home, Inbox, Search, Settings } from "lucide-react";
+import { Home, BrickWallFire, Settings } from "lucide-react";
 
 import {
   Sidebar,
@@ -10,32 +10,22 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/common/components/ui/sidebar";
+import { paths } from "../../constants/paths";
 
-// Menu items.
 const items = [
   {
-    title: "Home",
-    url: "#",
+    title: "Главная",
+    url: paths.getHomePath(),
     icon: Home,
   },
   {
-    title: "Inbox",
-    url: "#",
-    icon: Inbox,
+    title: "Датчики",
+    url: paths.getSensorsPath(),
+    icon: BrickWallFire,
   },
   {
-    title: "Calendar",
-    url: "#",
-    icon: Calendar,
-  },
-  {
-    title: "Search",
-    url: "#",
-    icon: Search,
-  },
-  {
-    title: "Settings",
-    url: "#",
+    title: "Настройки",
+    url: paths.getSettingsPath(),
     icon: Settings,
   },
 ];
