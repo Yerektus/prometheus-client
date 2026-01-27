@@ -22,6 +22,7 @@ import { toast } from "sonner";
 import { buildHttpHandler } from "@/common/utils/build-http-error";
 import { useAuthStore } from "../../stores/auth-store";
 import { useNavigate } from "react-router-dom";
+import { paths } from "@/common/constants/paths";
 
 const formSchema = z.object({
   email: z.email(),
@@ -48,7 +49,7 @@ export const LoginForm = () => {
       setAuth(auth, user);
       form.reset();
 
-      navigate("/dashboard");
+      navigate(paths.getDashboardPath());
     },
     onError: (error) => {
       buildHttpHandler(error);
