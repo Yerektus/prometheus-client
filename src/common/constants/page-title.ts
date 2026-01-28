@@ -1,5 +1,7 @@
+import { paths } from "./paths";
+
 const pageNames: Record<string, string> = {
-  sensors: "Датчики",
+  [paths.getSensorsPath()]: "Датчики",
 };
 
 export const getPageTitleByPath = (pathname: string): string => {

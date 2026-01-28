@@ -1,10 +1,10 @@
-import { DashboardView } from "@/features/dashboard/view/dashboard-view";
 import { LoginView } from "../features/auth/view/login/login-view";
 import { createBrowserRouter, RouteObject } from "react-router-dom";
 import { NavigationLayout } from "@/common/layouts/navigation-/navigation-layout";
 import { AuthGuardLayout } from "@/common/layouts/auth-guard-layout/auth-guard-layout";
 import { NonAuthGuardLayout } from "@/common/layouts/non-auth-guard-layout/non-auth-guard-layout";
 import { NotFound } from "@/features/not-found/view/not-found-view";
+import { LocationsView } from "@/features/locations/view/locations-view";
 
 export const routes: RouteObject[] = [
   {
@@ -27,7 +27,7 @@ export const routes: RouteObject[] = [
         children: [
           {
             path: "sensors",
-            element: <DashboardView />,
+            element: <LocationsView />,
           },
         ],
       },
