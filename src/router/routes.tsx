@@ -4,7 +4,7 @@ import { NavigationLayout } from "@/common/layouts/navigation-/navigation-layout
 import { AuthGuardLayout } from "@/common/layouts/auth-guard-layout/auth-guard-layout";
 import { NonAuthGuardLayout } from "@/common/layouts/non-auth-guard-layout/non-auth-guard-layout";
 import { NotFound } from "@/features/not-found/view/not-found-view";
-import { LocationsView } from "@/features/locations/view/locations-view";
+import { FireSensorsView } from "@/features/fire-sensors/view/fire-sensors-view";
 
 export const routes: RouteObject[] = [
   {
@@ -27,7 +27,7 @@ export const routes: RouteObject[] = [
         children: [
           {
             path: "sensors",
-            element: <LocationsView />,
+            element: <FireSensorsView />,
           },
         ],
       },
