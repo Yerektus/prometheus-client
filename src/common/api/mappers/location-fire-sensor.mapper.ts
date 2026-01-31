@@ -12,5 +12,6 @@ export const mapFireSensorAndLocationToColumns = (
     model: payload.model,
     isActive: payload.isActive,
     installedAt: payload.installedAt,
+    users: payload.location?.users ?? [],
   };
 };

@@ -1,6 +1,7 @@
 import { Location } from "@/common/entities/location";
 import { LocationResponse } from "../responses/location.response";
 import { mapFireSensorResponseToFireSensor } from "./fire-sensor.mapper";
+import { mapUserResponseToUser } from "./user.mapper";
 
 export const mapLocationResponseToLocation = (
   payload: LocationResponse,
@@ -18,5 +19,6 @@ export const mapLocationResponseToLocation = (
       payload.fire_sensors?.map((fireSensor) =>
         mapFireSensorResponseToFireSensor(fireSensor),
       ) ?? [],
+    users: payload.users?.map((user) => mapUserResponseToUser(user)) ?? [],
   };
 };

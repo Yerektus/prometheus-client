@@ -17,6 +17,7 @@ import { FireSensorsTableToolbar } from "../fire-sensors-table-toolbar/fire-sens
 import { FireSensorAndLocationColumns } from "@/common/entities/fire-sensor-and-location";
 import { FireSensorBadge } from "../fire-sensor-badge/fire-sensor-badge";
 import { FireSensorsTableProps } from "./fire-sensors-table.types";
+import { UsersCell } from "../users-cell/users-cell";
 
 export const columns: ColumnDef<FireSensorAndLocationColumns>[] = [
   {
@@ -100,6 +101,25 @@ export const columns: ColumnDef<FireSensorAndLocationColumns>[] = [
     },
     cell: ({ row }) => (
       <div className="lowercase">{row.getValue("address")}</div>
+    ),
+  },
+  {
+    accessorKey: "users",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Владельцы
+          <ArrowUpDown />
+        </Button>
+      );
+    },
+    cell: ({ row }) => (
+      <div className="lowercase">
+        <UsersCell visibleCount={2} users={row.original.users ?? []} />
+      </div>
     ),
   },
   {

@@ -1,3 +1,5 @@
+import { User } from "./user";
+
 export interface FireSensorAndLocationColumns {
   country?: string;
   city?: string;
@@ -6,4 +8,5 @@ export interface FireSensorAndLocationColumns {
   model: string | null;
   isActive: boolean;
   installedAt: string | null;
+  users: User[] | null;
 }

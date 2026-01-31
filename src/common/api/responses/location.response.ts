@@ -1,4 +1,5 @@
 import { FireSensorResponse } from "./fire-sensor.response";
+import { UserResponse } from "./user.response";
 
 export interface LocationResponse {
   id: string;
@@ -8,4 +9,5 @@ export interface LocationResponse {
   floor: string;
   room: string;
   fire_sensors?: FireSensorResponse[];
+  users?: UserResponse[];
 }
