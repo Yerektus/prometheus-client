@@ -4,6 +4,7 @@ import { mapRoleResponseToRole } from "./role.mapper";
 
 export const mapUserResponseToUser = (response: UserResponse): User => {
   return {
+    id: response.id,
     username: response.username,
     email: response.email,
     firstName: response.first_name,

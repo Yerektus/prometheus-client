@@ -1,9 +1,6 @@
 import {
   Popover,
   PopoverContent,
-  PopoverDescription,
-  PopoverHeader,
-  PopoverTitle,
   PopoverTrigger,
 } from "@/common/components/ui/popover";
 import { UserBadge } from "../user-badge/user-badge";

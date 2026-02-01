@@ -7,7 +7,7 @@ export interface LocationResponse {
   city: string;
   address: string;
   floor: string;
-  room: string;
+  flat: string;
   fire_sensors?: FireSensorResponse[];
   users?: UserResponse[];
 }

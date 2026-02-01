@@ -2,4 +2,5 @@ import { FireSensorAndLocationColumns } from "@/common/entities/fire-sensor-and-
 
 export interface FireSensorsTableProps {
   data: FireSensorAndLocationColumns[];
+  refetch: () => void;
 }

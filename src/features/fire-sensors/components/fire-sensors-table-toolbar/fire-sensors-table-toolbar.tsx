@@ -1,4 +1,3 @@
-import { Input } from "@/common/components/ui/input";
 import { FireSensorsTableToolbarProps } from "./fire-sensors-table-toolbar.types";
 import { Button } from "@/common/components/ui/button";
 import { PlusCircle, Search } from "lucide-react";
@@ -7,10 +6,24 @@ import {
   InputGroupAddon,
   InputGroupInput,
 } from "@/common/components/ui/input-group";
+import { useState } from "react";
+import { AddFireSensorDialog } from "../add-fire-sensor-dialog/add-fire-sensor-dialog";
 
 export function FireSensorsTableToolbar<TData>({
   table,
+  refetch,
 }: FireSensorsTableToolbarProps<TData>) {
+  const [isOpenDialog, setIsOpenDialog] = useState<boolean>(false);
+
+  const handleOpenDialog = () => {
+    setIsOpenDialog(true);
+  };
+
+  const handleCloseDialog = (needRefresh?: boolean) => {
+    setIsOpenDialog(false);
+    if (needRefresh) refetch();
+  };
+
   return (
     <div className="flex gap-3 flex-col items-center mb-4">
       <div className="w-full flex items-center gap-2">
@@ -31,11 +44,12 @@ export function FireSensorsTableToolbar<TData>({
             <Search />
           </InputGroupAddon>
         </InputGroup>
-        <Button>
+        <Button onClick={handleOpenDialog}>
           <PlusCircle />
           Добавить датчик
         </Button>
       </div>
+      <AddFireSensorDialog isOpen={isOpenDialog} onClose={handleCloseDialog} />
     </div>
   );
 }

@@ -5,7 +5,7 @@ import { fetchFireSensors } from "@/common/api/requests/fire-sensors/fetch-fire-
 import { useMemo } from "react";
 
 export const FireSensorsView = () => {
-  const { data } = useQuery({
+  const { data, refetch } = useQuery({
     queryKey: ["fireSensors"],
     queryFn: fetchFireSensors,
     retry: false,
@@ -21,7 +21,7 @@ export const FireSensorsView = () => {
 
   return (
     <div className="w-full h-screen p-4">
-      <FireSensorsTable data={fireSensorAndLocation} />
+      <FireSensorsTable refetch={refetch} data={fireSensorAndLocation} />
     </div>
   );
 };

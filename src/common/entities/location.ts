@@ -7,7 +7,7 @@ export interface Location {
   city: string;
   address: string;
   floor: string | null;
-  room: string | null;
+  flat: string | null;
   latitude: number;
   longitude: number;
   fireSensors: FireSensor[];

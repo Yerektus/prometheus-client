@@ -12,7 +12,7 @@ export const mapLocationResponseToLocation = (
     city: payload.city,
     address: payload.address,
     floor: payload.floor,
-    room: payload.room,
+    flat: payload.flat,
     longitude: 0, // todo(Yerektus)
     latitude: 0, // todo(Yerektus)
     fireSensors:

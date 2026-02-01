@@ -1,6 +1,7 @@
 import { RoleResponse } from "./role.response";
 
 export interface UserResponse {
+  id: string;
   username: string;
   email: string;
   first_name: string;

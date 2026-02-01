@@ -141,7 +141,7 @@ export const columns: ColumnDef<FireSensorAndLocationColumns>[] = [
   },
 ];
 
-export const FireSensorsTable = ({ data }: FireSensorsTableProps) => {
+export const FireSensorsTable = ({ data, refetch }: FireSensorsTableProps) => {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     [],
@@ -171,7 +171,7 @@ export const FireSensorsTable = ({ data }: FireSensorsTableProps) => {
 
   return (
     <div className="w-full">
-      <FireSensorsTableToolbar table={table} />
+      <FireSensorsTableToolbar refetch={refetch} table={table} />
       <DataTable table={table} />
     </div>
   );
