@@ -14,12 +14,15 @@ export function DataTable<TData>({ table }: DataTableProps<TData>) {
   return (
     <div className="overflow-hidden">
       <Table>
-        <TableHeader className="bg-gray-100">
+        <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>
               {headerGroup.headers.map((header) => {
                 return (
-                  <TableHead className="border" key={header.id}>
+                  <TableHead
+                    className="border first:border-l-0 last:border-r-0 text-muted-foreground"
+                    key={header.id}
+                  >
                     {header.isPlaceholder
                       ? null
                       : flexRender(
@@ -38,9 +41,13 @@ export function DataTable<TData>({ table }: DataTableProps<TData>) {
               <TableRow
                 key={row.id}
                 data-state={row.getIsSelected() && "selected"}
+                className="group"
               >
                 {row.getVisibleCells().map((cell) => (
-                  <TableCell key={cell.id} className="border">
+                  <TableCell
+                    key={cell.id}
+                    className="relative border first:border-l-0 last:border-r-0"
+                  >
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </TableCell>
                 ))}

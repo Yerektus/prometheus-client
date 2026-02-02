@@ -4,3 +4,7 @@ export interface FireSensorsTableProps {
   data: FireSensorAndLocationColumns[];
   refetch: () => void;
 }
+
+export interface FireSensorsTableColumnsProps {
+  onOpenSheet: (fireSensor: FireSensorAndLocationColumns) => void;
+}

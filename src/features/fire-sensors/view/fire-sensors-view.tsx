@@ -20,7 +20,7 @@ export const FireSensorsView = () => {
   );
 
   return (
-    <div className="w-full h-screen p-4">
+    <div className="w-full h-screen py-4 px-8">
       <FireSensorsTable refetch={refetch} data={fireSensorAndLocation} />
     </div>
   );
