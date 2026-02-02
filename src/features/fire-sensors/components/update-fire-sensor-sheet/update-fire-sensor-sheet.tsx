@@ -16,15 +16,11 @@ import {
 import { z } from "zod";
 import { buildHttpHandler } from "@/common/utils/build-http-error";
 import { fetchUserByFullname } from "@/common/api/requests/users/fetch-user-by-fullname";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useQueryClient } from "@tanstack/react-query";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { toast } from "sonner";
-import { createFireSensor } from "@/common/api/requests/fire-sensors/create-fire-sensor";
 import { Field, FieldError, FieldLabel } from "@/common/components/ui/field";
 import { useEffect, useState } from "react";
-import { Checkbox } from "@/common/components/ui/checkbox";
-import { updateFireSensor } from "@/common/api/requests/fire-sensors/update-fire-sensor";
 import { UpdateFireSensorDialog } from "../update-fire-sensor-dialog/update-fire-sensor-dialog";
 
 const formSchema = z.object({
