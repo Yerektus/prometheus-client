@@ -57,7 +57,7 @@ export function DataTable<TData>({ table }: DataTableProps<TData>) {
             <TableRow>
               <TableCell
                 colSpan={table.getAllColumns().length}
-                className="h-24 text-center border"
+                className="h-24 text-center border border-l-0 border-r-0"
               >
                 No results.
               </TableCell>
