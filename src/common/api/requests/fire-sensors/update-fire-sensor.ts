@@ -18,7 +18,5 @@ export const updateFireSensor = async (payload: FireSensorAndLocation) => {
     model: payload.model,
   });
 
-  console.log(response);
-
   return mapUserResponseToUser(response.data.data);
 };

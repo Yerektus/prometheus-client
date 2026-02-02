@@ -12,17 +12,14 @@ import { DataTableProps } from "./data-table.types";
 
 export function DataTable<TData>({ table }: DataTableProps<TData>) {
   return (
-    <div className="overflow-hidden">
+    <div className="overflow-hidden border rounded-lg">
       <Table>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>
               {headerGroup.headers.map((header) => {
                 return (
-                  <TableHead
-                    className="border first:border-l-0 last:border-r-0 text-muted-foreground"
-                    key={header.id}
-                  >
+                  <TableHead key={header.id}>
                     {header.isPlaceholder
                       ? null
                       : flexRender(
@@ -44,10 +41,7 @@ export function DataTable<TData>({ table }: DataTableProps<TData>) {
                 className="group"
               >
                 {row.getVisibleCells().map((cell) => (
-                  <TableCell
-                    key={cell.id}
-                    className="relative border first:border-l-0 last:border-r-0"
-                  >
+                  <TableCell key={cell.id} className="relative">
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </TableCell>
                 ))}
@@ -57,7 +51,7 @@ export function DataTable<TData>({ table }: DataTableProps<TData>) {
             <TableRow>
               <TableCell
                 colSpan={table.getAllColumns().length}
-                className="h-24 text-center border border-l-0 border-r-0"
+                className="h-24 text-center border border-l-0"
               >
                 No results.
               </TableCell>
