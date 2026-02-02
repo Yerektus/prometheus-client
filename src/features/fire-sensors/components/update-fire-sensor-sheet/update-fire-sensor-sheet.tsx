@@ -22,6 +22,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Field, FieldError, FieldLabel } from "@/common/components/ui/field";
 import { useEffect, useState } from "react";
 import { UpdateFireSensorDialog } from "../update-fire-sensor-dialog/update-fire-sensor-dialog";
+import { DeleteFireSensorDialog } from "../delete-fire-sensor-dialog/delete-fire-sensor-dialog";
 
 const formSchema = z.object({
   fullName: z
@@ -72,6 +73,8 @@ export function UpdateFireSensorSheet({
   const [isOpenDialog, setIsOpenDialog] = useState<boolean>(false);
   const [fireSensorAndLocation, setFireSensorAndLoction] =
     useState<FireSensorAndLocation>({} as FireSensorAndLocation);
+  const [deletefireSensorId, setDeletefireSensorId] = useState<string>("");
+  const [isOpenDeleteDialog, setIsOpenDelteDialog] = useState<boolean>(false);
 
   const queryClient = useQueryClient();
   const form = useForm<z.infer<typeof formSchema>>({
@@ -112,6 +115,17 @@ export function UpdateFireSensorSheet({
   const handleOpenDialog = (payload: FireSensorAndLocation) => {
     setIsOpenDialog(true);
     setFireSensorAndLoction(payload);
+  };
+
+  const handleCloseDeleteDialog = (needRefresh?: boolean) => {
+    setIsOpenDelteDialog(false);
+    onClose(needRefresh);
+    form.reset();
+  };
+
+  const handleOpenDeleteDialog = (fireSensorId: string) => {
+    setIsOpenDelteDialog(true);
+    setDeletefireSensorId(fireSensorId);
   };
 
   const handleClose = (needRefresh?: boolean) => {
@@ -388,9 +402,14 @@ export function UpdateFireSensorSheet({
             >
               Сохранить изменения
             </Button>
-            <SheetClose asChild>
-              <Button variant="outline">Удалить</Button>
-            </SheetClose>
+            <Button
+              variant="outline"
+              onClick={() =>
+                handleOpenDeleteDialog(fireSensor.fireSensorId ?? "")
+              }
+            >
+              Удалить
+            </Button>
           </SheetFooter>
         </SheetContent>
       </Sheet>
@@ -398,6 +417,11 @@ export function UpdateFireSensorSheet({
         fireSensorAndLocation={fireSensorAndLocation}
         isOpen={isOpenDialog}
         onClose={handleCloseDialog}
+      />
+      <DeleteFireSensorDialog
+        fireSensorId={deletefireSensorId}
+        isOpen={isOpenDeleteDialog}
+        onClose={handleCloseDeleteDialog}
       />
     </>
   );
