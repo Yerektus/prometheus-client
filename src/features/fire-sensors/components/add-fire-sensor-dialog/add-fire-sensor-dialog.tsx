@@ -74,7 +74,8 @@ export const AddFireSensorDialog = ({
       userId: string;
       payload: z.infer<typeof formSchema>;
     }) =>
-      await createFireSensor(userId, {
+      await createFireSensor({
+        ownerId: userId,
         country: "Kazakhstan",
         city: payload.city,
         address: payload.address,
@@ -82,7 +83,6 @@ export const AddFireSensorDialog = ({
         flat: payload.flat,
         serialNumber: payload.serialNumber,
         model: payload.model,
-        isActive: false,
       }),
     onSuccess: () => {
       toast.success("Датчик добавлен успешно.");
@@ -111,7 +111,6 @@ export const AddFireSensorDialog = ({
 
   const handleSubmit = async (values: z.infer<typeof formSchema>) => {
     const fullNameArray = values.fullName.split(" ");
-    console.log(fullNameArray);
 
     try {
       const user = await queryClient.fetchQuery({
