@@ -5,8 +5,8 @@ import { ShieldCheck, ShieldOff } from "lucide-react";
 export const FireSensorBadge = ({ isActive }: FireSensorBadgeProps) => {
   return (
     <Badge
-      variant={isActive ? "default" : "outline"}
-      className={isActive ? "bg-green-50 text-green-700" : ""}
+      variant={"outline"}
+      className={isActive ? "bg-green-50 text-green-700 border-green-700" : ""}
     >
       {isActive ? (
         <>
