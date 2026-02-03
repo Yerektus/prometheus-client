@@ -1,4 +1,5 @@
 import { LocationResponse } from "./location.response";
+import { SensorReadingResponse } from "./sensor-reading.response";
 
 export interface FireSensorResponse {
   id: string;
@@ -7,4 +8,5 @@ export interface FireSensorResponse {
   is_active: boolean;
   installed_at: string;
   location?: LocationResponse;
+  sensor_readings?: SensorReadingResponse[];
 }

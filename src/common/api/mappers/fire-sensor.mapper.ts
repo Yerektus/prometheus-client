@@ -1,6 +1,7 @@
 import { FireSensor } from "@/common/entities/fire-sensor";
 import { FireSensorResponse } from "../responses/fire-sensor.response";
 import { mapLocationResponseToLocation } from "./location.mapper";
+import { mapSensorReadingResponseToSensorReading } from "./sensor-reading";
 
 export const mapFireSensorResponseToFireSensor = (
   payload: FireSensorResponse,
@@ -13,6 +14,11 @@ export const mapFireSensorResponseToFireSensor = (
     installedAt: payload.installed_at,
     location: payload.location
       ? mapLocationResponseToLocation(payload.location)
+      : null,
+    sensorReadings: payload.sensor_readings
+      ? payload.sensor_readings.map((sensor_reading) =>
+          mapSensorReadingResponseToSensorReading(sensor_reading),
+        )
       : null,
   };
 };

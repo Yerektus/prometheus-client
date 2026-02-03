@@ -1,4 +1,4 @@
-import { Home, BrickWallFire, Settings } from "lucide-react";
+import { Home, BrickWallFire, Eye } from "lucide-react";
 
 import {
   Sidebar,
@@ -24,9 +24,9 @@ const items = [
     icon: BrickWallFire,
   },
   {
-    title: "Настройки",
-    url: paths.getSettingsPath(),
-    icon: Settings,
+    title: "Мониторинг",
+    url: paths.getSensorReadingsPath(),
+    icon: Eye,
   },
 ];
 

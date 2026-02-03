@@ -5,29 +5,31 @@ import { AuthGuardLayout } from "@/common/layouts/auth-guard-layout/auth-guard-l
 import { NonAuthGuardLayout } from "@/common/layouts/non-auth-guard-layout/non-auth-guard-layout";
 import { NotFound } from "@/features/not-found/view/not-found-view";
 import { FireSensorsView } from "@/features/fire-sensors/view/fire-sensors-view";
+import { SensorReadingsView } from "@/features/sensor-readings/view/sensor-reandings-view";
 
 export const routes: RouteObject[] = [
   {
-    path: "/auth",
     element: <NonAuthGuardLayout />,
     children: [
       {
-        path: "sign-in",
+        path: "auth/sign-in",
         element: <LoginView />,
       },
     ],
   },
   {
-    path: "/",
     element: <AuthGuardLayout />,
     children: [
       {
-        path: "dashboard",
         element: <NavigationLayout />,
         children: [
           {
-            path: "sensors",
+            path: "dashboard/sensors",
             element: <FireSensorsView />,
+          },
+          {
+            path: "/dashboard/sensor-readings",
+            element: <SensorReadingsView />,
           },
         ],
       },
