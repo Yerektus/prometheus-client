@@ -7,8 +7,6 @@ export const fetchFireSensorsWithReadings = async () => {
     data: FireSensorResponse[];
   }>("/api/v1/fire_sensors/sensor_readings");
 
-  console.log(response.data);
-
   return response.data.data.map((fireSensor) =>
     mapFireSensorResponseToFireSensor(fireSensor),
   );

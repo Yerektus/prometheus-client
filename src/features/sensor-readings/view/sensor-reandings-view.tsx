@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import { mapFireSensorAndLocationToColumns } from "@/common/api/mappers/location-fire-sensor.mapper";
 import { useMemo } from "react";
 import { fetchFireSensorsWithReadings } from "@/common/api/requests/fire-sensors/fetch-fire-sensors-readings";
 import { SensorReadingsTable } from "../components/sensor-readings-table";

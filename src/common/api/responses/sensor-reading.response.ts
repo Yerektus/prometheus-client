@@ -3,5 +3,5 @@ export interface SensorReadingResponse {
   temperature_c: number;
   humidity_pct: number;
   gas_ppm: number;
-  recorded_at: Date;
+  recorded_at: string;
 }

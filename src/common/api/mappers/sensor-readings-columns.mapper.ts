@@ -1,4 +1,3 @@
-import { FireSensorAndLocationColumns } from "@/common/entities/fire-sensor-and-location";
 import { FireSensor } from "@/common/entities/fire-sensor";
 import { SensorReadingsColumns } from "@/common/entities/sensor-readings-columns";
 
@@ -20,7 +19,9 @@ export const mapSensorReadingsToColumns = (
     temperatureC: payload.sensorReadings?.[0].temperatureC ?? 0,
     humidityPct: payload.sensorReadings?.[0].humidityPct ?? 0,
     gasPpm: payload.sensorReadings?.[0].gasPpm ?? 0,
-    recordedAt: payload.sensorReadings?.[0].recordedAt.toDateString() ?? "",
+    recordedAt: payload.sensorReadings?.[0].recordedAt
+      ? payload.sensorReadings[0].recordedAt
+      : "",
     users: payload.location?.users ?? [],
   };
 };

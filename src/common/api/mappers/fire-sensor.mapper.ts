@@ -15,7 +15,7 @@ export const mapFireSensorResponseToFireSensor = (
     location: payload.location
       ? mapLocationResponseToLocation(payload.location)
       : null,
-    sensorReadings: payload.sensor_readings
+    sensorReadings: payload.sensor_readings?.length
       ? payload.sensor_readings.map((sensor_reading) =>
           mapSensorReadingResponseToSensorReading(sensor_reading),
         )

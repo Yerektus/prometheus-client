@@ -15,6 +15,7 @@ import { DataTable } from "@/common/components/data-table/data-table";
 import { SensorReadingsTableProps } from "./sensor-readings-table.types";
 import { SensorReadingsColumns } from "@/common/entities/sensor-readings-columns";
 import { FireSensorBadge } from "@/features/fire-sensors/components/fire-sensor-badge/fire-sensor-badge";
+import { dateTimeFormatter } from "@/common/utils/date-time-formatter";
 
 const getColumns = (): ColumnDef<SensorReadingsColumns>[] => {
   return [
@@ -69,6 +70,48 @@ const getColumns = (): ColumnDef<SensorReadingsColumns>[] => {
       ),
     },
     {
+      accessorKey: "temperatureC",
+      header: ({ column }) => {
+        return (
+          <Button
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Температура
+          </Button>
+        );
+      },
+      cell: ({ row }) => <div>{row.getValue("temperatureC")}°C</div>,
+    },
+    {
+      accessorKey: "humidityPct",
+      header: ({ column }) => {
+        return (
+          <Button
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Влажность
+          </Button>
+        );
+      },
+      cell: ({ row }) => <div>{row.getValue("humidityPct")}%</div>,
+    },
+    {
+      accessorKey: "gasPpm",
+      header: ({ column }) => {
+        return (
+          <Button
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Газ
+          </Button>
+        );
+      },
+      cell: ({ row }) => <div>{row.getValue("gasPpm")} ppm</div>,
+    },
+    {
       accessorKey: "recordedAt",
       header: ({ column }) => {
         return (
@@ -81,7 +124,9 @@ const getColumns = (): ColumnDef<SensorReadingsColumns>[] => {
         );
       },
       cell: ({ row }) => (
-        <div className="lowercase">{row.getValue("recordedAt")}</div>
+        <div className="lowercase">
+          {dateTimeFormatter(row.getValue("recordedAt"))}
+        </div>
       ),
     },
   ];
