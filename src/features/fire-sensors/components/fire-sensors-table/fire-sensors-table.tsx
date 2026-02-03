@@ -22,7 +22,6 @@ import {
 import { UsersCell } from "../users-cell/users-cell";
 import { PanelRightOpen } from "lucide-react";
 import { UpdateFireSensorSheet } from "../update-fire-sensor-sheet/update-fire-sensor-sheet";
-import { Switch } from "@/common/components/ui/switch";
 
 const getColumns = ({
   onOpenSheet,
