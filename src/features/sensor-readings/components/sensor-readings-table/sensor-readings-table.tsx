@@ -1,73 +1,178 @@
-import { flexRender } from "@tanstack/react-table";
-
+import * as React from "react";
+import { Button } from "@/common/components/ui/button";
 import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/common/components/ui/table";
+  getCoreRowModel,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  useReactTable,
+  type ColumnDef,
+  type ColumnFiltersState,
+  type SortingState,
+  type VisibilityState,
+} from "@tanstack/react-table";
 import { SensorReadingsTableProps } from "./sensor-readings-table.types";
-import { useNavigate } from "react-router-dom";
+import { SensorReadingsColumns } from "@/common/entities/sensor-readings-columns";
+import { FireSensorBadge } from "@/features/fire-sensors/components/fire-sensor-badge/fire-sensor-badge";
+import { dateTimeFormatter } from "@/common/utils/date-time-formatter";
+import { DataTable } from "@/common/components/data-table/data-table";
 import { paths } from "@/common/constants/paths";
+import { useNavigate } from "react-router-dom";
 
-export function SensorReadingsTable<TData>({
-  table,
-}: SensorReadingsTableProps<TData>) {
-  const naviage = useNavigate();
+const getColumns = (): ColumnDef<SensorReadingsColumns>[] => {
+  return [
+    {
+      accessorKey: "model",
+      header: ({ column }) => {
+        return (
+          <Button
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Модель устройства
+          </Button>
+        );
+      },
+      cell: ({ row }) => (
+        <div className="lowercase">{row.getValue("model")}</div>
+      ),
+    },
+    {
+      accessorKey: "serialNumber",
+      header: ({ column }) => {
+        return (
+          <Button
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Серийный номер
+          </Button>
+        );
+      },
+      cell: ({ row }) => (
+        <div className="lowercase">{row.getValue("serialNumber")}</div>
+      ),
+    },
+    {
+      accessorKey: "isActive",
+      header: ({ column }) => {
+        return (
+          <Button
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Активность
+          </Button>
+        );
+      },
+      cell: ({ row }) => (
+        <div className="lowercase">
+          <FireSensorBadge isActive={row.getValue("isActive")} />
+        </div>
+      ),
+    },
+    {
+      accessorKey: "temperatureC",
+      header: ({ column }) => {
+        return (
+          <Button
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Температура
+          </Button>
+        );
+      },
+      cell: ({ row }) => <div>{row.getValue("temperatureC")}°C</div>,
+    },
+    {
+      accessorKey: "humidityPct",
+      header: ({ column }) => {
+        return (
+          <Button
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Влажность
+          </Button>
+        );
+      },
+      cell: ({ row }) => <div>{row.getValue("humidityPct")}%</div>,
+    },
+    {
+      accessorKey: "gasPpm",
+      header: ({ column }) => {
+        return (
+          <Button
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Газ
+          </Button>
+        );
+      },
+      cell: ({ row }) => <div>{row.getValue("gasPpm")} ppm</div>,
+    },
+    {
+      accessorKey: "recordedAt",
+      header: ({ column }) => {
+        return (
+          <Button
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Время записи
+          </Button>
+        );
+      },
+      cell: ({ row }) => (
+        <div className="lowercase">
+          {dateTimeFormatter(row.getValue("recordedAt"))}
+        </div>
+      ),
+    },
+  ];
+};
+
+export const SensorReadingsTable = ({ data }: SensorReadingsTableProps) => {
+  const navigate = useNavigate();
+  const [sorting, setSorting] = React.useState<SortingState>([]);
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
+    [],
+  );
+  const [columnVisibility, setColumnVisibility] =
+    React.useState<VisibilityState>({});
+  const [rowSelection, setRowSelection] = React.useState({});
+
+  const columns = React.useMemo(() => getColumns(), []);
+
+  const table = useReactTable({
+    data,
+    columns,
+    getRowId: (row) => row.sensorReadingId,
+    onSortingChange: setSorting,
+    onColumnFiltersChange: setColumnFilters,
+    getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    onColumnVisibilityChange: setColumnVisibility,
+    onRowSelectionChange: setRowSelection,
+    state: {
+      sorting,
+      columnFilters,
+      columnVisibility,
+      rowSelection,
+    },
+  });
+
+  const handleClickRow = (fireSensorId: string) => {
+    navigate(paths.getDetailSensorReadingPath(fireSensorId));
+  };
+
   return (
-    <div className="overflow-hidden border rounded-lg">
-      <Table>
-        <TableHeader>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <TableRow key={headerGroup.id}>
-              {headerGroup.headers.map((header) => {
-                return (
-                  <TableHead key={header.id}>
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext(),
-                        )}
-                  </TableHead>
-                );
-              })}
-            </TableRow>
-          ))}
-        </TableHeader>
-        <TableBody>
-          {table.getRowModel().rows?.length ? (
-            table.getRowModel().rows.map((row) => (
-              <TableRow
-                key={row.id}
-                data-state={row.getIsSelected() && "selected"}
-                onClick={() =>
-                  naviage(paths.getDetailSensorReadingPath(row.id))
-                }
-                role="link"
-                className="cursor-pointer hover:bg-muted/50"
-              >
-                {row.getVisibleCells().map((cell) => (
-                  <TableCell key={cell.id} className="relative">
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </TableCell>
-                ))}
-              </TableRow>
-            ))
-          ) : (
-            <TableRow>
-              <TableCell
-                colSpan={table.getAllColumns().length}
-                className="h-24 text-center border border-l-0"
-              >
-                No results.
-              </TableCell>
-            </TableRow>
-          )}
-        </TableBody>
-      </Table>
+    <div className="w-full">
+      <DataTable table={table} onClickRow={handleClickRow} />
     </div>
   );
-}
+};

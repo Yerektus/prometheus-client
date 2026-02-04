@@ -22,6 +22,8 @@ import {
 import { UsersCell } from "../users-cell/users-cell";
 import { PanelRightOpen } from "lucide-react";
 import { UpdateFireSensorSheet } from "../update-fire-sensor-sheet/update-fire-sensor-sheet";
+import { useNavigate } from "react-router-dom";
+import { paths } from "@/common/constants/paths";
 
 const getColumns = ({
   onOpenSheet,
@@ -46,7 +48,10 @@ const getColumns = ({
             className="opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto absolute right-1 top-1/2 -translate-y-1/2 rounded-sm"
             variant={"outline"}
             size={"xs"}
-            onClick={() => onOpenSheet(row.original)}
+            onClick={(event) => {
+              event.stopPropagation();
+              onOpenSheet(row.original);
+            }}
           >
             <PanelRightOpen />
             Открыть
@@ -158,6 +163,7 @@ const getColumns = ({
 };
 
 export const FireSensorsTable = ({ data, refetch }: FireSensorsTableProps) => {
+  const navigate = useNavigate();
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     [],
@@ -184,6 +190,10 @@ export const FireSensorsTable = ({ data, refetch }: FireSensorsTableProps) => {
     }
   };
 
+  const handleClickRow = (sensorId: string) => {
+    navigate(paths.getDetailSensorPath(sensorId));
+  };
+
   const columns = React.useMemo(
     () => getColumns({ onOpenSheet: handleOpenUpdateSheet }),
     [],
@@ -192,6 +202,7 @@ export const FireSensorsTable = ({ data, refetch }: FireSensorsTableProps) => {
   const table = useReactTable({
     data,
     columns,
+    getRowId: (row) => row.fireSensorId ?? "",
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
     getCoreRowModel: getCoreRowModel(),
@@ -211,7 +222,7 @@ export const FireSensorsTable = ({ data, refetch }: FireSensorsTableProps) => {
   return (
     <div className="w-full">
       <FireSensorsTableToolbar refetch={refetch} table={table} />
-      <DataTable table={table} />
+      <DataTable table={table} onClickRow={handleClickRow} />
       <UpdateFireSensorSheet
         isOpen={isOpenUpdateSheet}
         onClose={handleCloseUpdateSheet}

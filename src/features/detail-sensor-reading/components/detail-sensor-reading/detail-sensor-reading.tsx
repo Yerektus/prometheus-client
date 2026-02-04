@@ -57,7 +57,7 @@ export const DetailSensorReading = ({
     );
   }
 
-  if (!data.fireSensor || !data.fireSensor.location) {
+  if (!data || !data.fireSensor || !data.fireSensor.location) {
     return <DetailSensorReadingEmpty />;
   }
 
@@ -78,7 +78,7 @@ export const DetailSensorReading = ({
         </p>
       </div>
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-2 gap-4 mb-8">
         <Card>
           <CardHeader className="pb-3">
             <CardTitle>Текущие показания</CardTitle>
@@ -134,8 +134,6 @@ export const DetailSensorReading = ({
           </CardContent>
         </Card>
       </div>
-
-      <Separator />
 
       <div className="flex flex-col gap-4 w-full h-[720px]">
         <h1 className="text-xl font-medium leading-tight">

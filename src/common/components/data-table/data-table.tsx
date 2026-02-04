@@ -10,7 +10,7 @@ import {
 } from "@/common/components/ui/table";
 import { DataTableProps } from "./data-table.types";
 
-export function DataTable<TData>({ table }: DataTableProps<TData>) {
+export function DataTable<TData>({ table, onClickRow }: DataTableProps<TData>) {
   return (
     <div className="overflow-hidden border rounded-lg">
       <Table>
@@ -38,7 +38,9 @@ export function DataTable<TData>({ table }: DataTableProps<TData>) {
               <TableRow
                 key={row.id}
                 data-state={row.getIsSelected() && "selected"}
-                className="group"
+                onClick={() => onClickRow(row.id)}
+                role="link"
+                className="group cursor-pointer hover:bg-muted/50"
               >
                 {row.getVisibleCells().map((cell) => (
                   <TableCell key={cell.id} className="relative">

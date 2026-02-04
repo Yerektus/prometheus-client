@@ -1,5 +1,5 @@
-import { Table } from "@tanstack/react-table";
+import { SensorReadingsColumns } from "@/common/entities/sensor-readings-columns";
 
-export interface SensorReadingsTableProps<TData> {
-  table: Table<TData>;
+export interface SensorReadingsTableProps {
+  data: SensorReadingsColumns[];
 }

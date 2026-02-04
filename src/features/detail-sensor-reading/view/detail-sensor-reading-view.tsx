@@ -19,14 +19,31 @@ import { useParams } from "react-router-dom";
 import { fetchSensorReadingById } from "@/common/api/requests/sensor-reading/fetch-sensor-reading";
 import { DetailSensorReading } from "../components/detail-sensor-reading/detail-sensor-reading";
 import { DetailSensorReadingEmpty } from "../components/detail-sensor-reading-empty/detail-sensor-reading-empty";
+import { usePageHeader } from "@/common/hooks/use-page-header";
+import { useEffect } from "react";
+import { paths } from "@/common/constants/paths";
 
 export function DetailSensorReadingView() {
+  const { setItems } = usePageHeader();
   const { sensorReadingId } = useParams<{ sensorReadingId: string }>();
 
   const { data, isLoading, error, refetch } = useQuery({
     queryKey: ["detail-sensor-reading"],
     queryFn: () => fetchSensorReadingById(sensorReadingId ?? ""),
   });
+
+  useEffect(() => {
+    setItems([
+      {
+        title: "Показаний датчиков",
+        href: paths.getSensorReadingsPath(),
+      },
+      {
+        title: data?.fireSensor?.serialNumber ?? "",
+        href: location.pathname,
+      },
+    ]);
+  }, [data, setItems]);
 
   if (error) {
     return (
@@ -44,7 +61,7 @@ export function DetailSensorReadingView() {
     );
   }
 
-  if (!sensorReadingId || !data) {
+  if (!sensorReadingId) {
     return <DetailSensorReadingEmpty />;
   }
 
