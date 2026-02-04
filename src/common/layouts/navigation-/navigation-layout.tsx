@@ -5,7 +5,7 @@ import { Outlet } from "react-router-dom";
 
 export const NavigationLayout = () => {
   return (
-    <SidebarProvider>
+    <SidebarProvider defaultOpen={false}>
       <AppSidebar />
       <SidebarInset>
         <main>

@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useMemo } from "react";
 import { fetchFireSensorsWithReadings } from "@/common/api/requests/fire-sensors/fetch-fire-sensors-readings";
-import { SensorReadingsTable } from "../components/sensor-readings-table";
+import { SensorReadingsList } from "../components/sensor-readings-list/sensor-readings-list";
 import { mapSensorReadingsToColumns } from "@/common/api/mappers/sensor-readings-columns.mapper";
 
 export const SensorReadingsView = () => {
@@ -19,7 +19,7 @@ export const SensorReadingsView = () => {
 
   return (
     <div className="w-full h-screen py-4 px-8">
-      <SensorReadingsTable data={fireSensorWithReadings} />
+      <SensorReadingsList data={fireSensorWithReadings} />
     </div>
   );
 };

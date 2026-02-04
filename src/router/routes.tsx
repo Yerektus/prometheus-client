@@ -6,6 +6,8 @@ import { NonAuthGuardLayout } from "@/common/layouts/non-auth-guard-layout/non-a
 import { NotFound } from "@/features/not-found/view/not-found-view";
 import { FireSensorsView } from "@/features/fire-sensors/view/fire-sensors-view";
 import { SensorReadingsView } from "@/features/sensor-readings/view/sensor-reandings-view";
+import { FireSensorDetailView } from "@/features/detail-fire-sensor/view/detail-fire-sensor";
+import { DetailSensorReadingView } from "@/features/detail-sensor-reading/view/detail-sensor-reading-view";
 
 export const routes: RouteObject[] = [
   {
@@ -28,8 +30,16 @@ export const routes: RouteObject[] = [
             element: <FireSensorsView />,
           },
           {
+            path: "/dashboard/sensors/:sensorId",
+            element: <FireSensorDetailView />,
+          },
+          {
             path: "/dashboard/sensor-readings",
             element: <SensorReadingsView />,
+          },
+          {
+            path: "/dashboard/sensor-readings/:sensorReadingId",
+            element: <DetailSensorReadingView />,
           },
         ],
       },

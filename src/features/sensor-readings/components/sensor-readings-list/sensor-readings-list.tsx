@@ -11,11 +11,11 @@ import {
   type SortingState,
   type VisibilityState,
 } from "@tanstack/react-table";
-import { DataTable } from "@/common/components/data-table/data-table";
-import { SensorReadingsTableProps } from "./sensor-readings-table.types";
+import { SensorReadingsListProps } from "./sensor-readings-list.types";
 import { SensorReadingsColumns } from "@/common/entities/sensor-readings-columns";
 import { FireSensorBadge } from "@/features/fire-sensors/components/fire-sensor-badge/fire-sensor-badge";
 import { dateTimeFormatter } from "@/common/utils/date-time-formatter";
+import { SensorReadingsTable } from "../sensor-readings-table/sensor-readings-table";
 
 const getColumns = (): ColumnDef<SensorReadingsColumns>[] => {
   return [
@@ -132,7 +132,7 @@ const getColumns = (): ColumnDef<SensorReadingsColumns>[] => {
   ];
 };
 
-export const SensorReadingsTable = ({ data }: SensorReadingsTableProps) => {
+export const SensorReadingsList = ({ data }: SensorReadingsListProps) => {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     [],
@@ -146,6 +146,7 @@ export const SensorReadingsTable = ({ data }: SensorReadingsTableProps) => {
   const table = useReactTable({
     data,
     columns,
+    getRowId: (row) => row.sensorReadingId,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
     getCoreRowModel: getCoreRowModel(),
@@ -164,7 +165,7 @@ export const SensorReadingsTable = ({ data }: SensorReadingsTableProps) => {
 
   return (
     <div className="w-full">
-      <DataTable table={table} />
+      <SensorReadingsTable table={table} />
     </div>
   );
 };

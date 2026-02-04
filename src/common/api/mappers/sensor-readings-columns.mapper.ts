@@ -7,6 +7,7 @@ export const mapSensorReadingsToColumns = (
   return {
     locationId: payload.location?.id ?? "",
     fireSensorId: payload.id,
+    sensorReadingId: payload.sensorReadings?.[0].id ?? "",
     country: payload.location?.country ?? "",
     city: payload.location?.city ?? "",
     address: payload.location?.address ?? "",

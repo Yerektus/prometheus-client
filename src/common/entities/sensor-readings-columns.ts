@@ -3,6 +3,7 @@ import { User } from "./user";
 export interface SensorReadingsColumns {
   fireSensorId: string;
   locationId: string;
+  sensorReadingId: string;
   country: string;
   city: string;
   address: string;

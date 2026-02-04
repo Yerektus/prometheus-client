@@ -1,5 +1,5 @@
 import { SensorReadingsColumns } from "@/common/entities/sensor-readings-columns";
 
-export interface SensorReadingsTableProps {
+export interface SensorReadingsListProps {
   data: SensorReadingsColumns[];
 }
