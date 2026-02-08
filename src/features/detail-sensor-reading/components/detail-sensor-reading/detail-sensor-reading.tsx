@@ -140,8 +140,11 @@ export const DetailSensorReading = ({
           Карта локации датчика
         </h1>
         <Map
+          latitude={43.238}
+          longitude={76.8829}
+          zoom={12}
           style={{ width: "100%", height: "100%", borderRadius: "16px" }}
-          mapStyle="https://demotiles.maplibre.org/style.json"
+          mapStyle="https://tiles.stadiamaps.com/styles/alidade_smooth.json"
         />
       </div>
     </div>
