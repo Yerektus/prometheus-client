@@ -8,6 +8,7 @@ import { FireSensorsView } from "@/features/fire-sensors/view/fire-sensors-view"
 import { SensorReadingsView } from "@/features/sensor-readings/view/sensor-reandings-view";
 import { FireSensorDetailView } from "@/features/detail-fire-sensor/view/detail-fire-sensor";
 import { DetailSensorReadingView } from "@/features/detail-sensor-reading/view/detail-sensor-reading-view";
+import { UsersView } from "@/features/users/view/users-view";
 
 export const routes: RouteObject[] = [
   {
@@ -36,6 +37,10 @@ export const routes: RouteObject[] = [
           {
             path: "/dashboard/sensor-readings",
             element: <SensorReadingsView />,
+          },
+          {
+            path: "/dashboard/users",
+            element: <UsersView />,
           },
           {
             path: "/dashboard/sensor-readings/:sensorReadingId",

@@ -1,14 +1,17 @@
-import { Home, BrickWallFire, Eye } from "lucide-react";
+import { Home, BrickWallFire, Eye, Users } from "lucide-react";
+import { X } from "lucide-react";
+import { Button } from "@/common/components/ui/button";
 
 import {
   Sidebar,
   SidebarContent,
   SidebarGroup,
   SidebarGroupContent,
-  SidebarGroupLabel,
+  SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  useSidebar,
 } from "@/common/components/ui/sidebar";
 import { paths } from "../../constants/paths";
 
@@ -28,14 +31,42 @@ const items = [
     url: paths.getSensorReadingsPath(),
     icon: Eye,
   },
+  {
+    title: "Пользователи",
+    url: paths.getUsersPath(),
+    icon: Users,
+  },
 ];
 
 export function AppSidebar() {
+  const { isMobile, setOpen, setOpenMobile } = useSidebar();
+
+  const handleCloseSidebar = () => {
+    if (isMobile) {
+      setOpenMobile(false);
+      return;
+    }
+
+    setOpen(false);
+  };
+
   return (
-    <Sidebar collapsible="icon" variant="inset">
+    <Sidebar collapsible="offcanvas" variant="floating" overlay>
+      <SidebarHeader className="p-2">
+        <div className="flex justify-end">
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon-sm"
+            onClick={handleCloseSidebar}
+            aria-label="Закрыть боковое меню"
+          >
+            <X />
+          </Button>
+        </div>
+      </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Application</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item) => (

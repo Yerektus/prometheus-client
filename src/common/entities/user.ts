@@ -8,4 +8,5 @@ export interface User {
   lastName: string;
   phoneNumbers: string;
   roles?: Role[];
+  fireSensorIds?: string[];
 }

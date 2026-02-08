@@ -8,4 +8,5 @@ export interface UserResponse {
   last_name: string;
   phone_numbers: string;
   roles?: RoleResponse[];
+  fire_sensor_ids?: string[];
 }

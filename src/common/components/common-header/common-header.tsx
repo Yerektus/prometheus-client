@@ -1,25 +1,22 @@
-import { useLocation } from "react-router-dom";
 import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbList,
-  BreadcrumbPage,
   BreadcrumbSeparator,
 } from "../ui/breadcrumb";
-import { SidebarTrigger } from "../ui/sidebar";
-import { getPageTitleByPath } from "@/common/constants/page-title";
 import { usePageHeader } from "@/common/hooks/use-page-header";
 import { Skeleton } from "../ui/skeleton";
+import { SidebarTrigger } from "../ui/sidebar";
 
 export const CommonHeader = () => {
   const { items } = usePageHeader();
 
   return (
     <header className="flex h-14 shrink-0 items-center gap-2 border-b px-4">
-      <SidebarTrigger className="mr-2" size={"icon-sm"} />
       <Breadcrumb>
         <BreadcrumbList>
+          <SidebarTrigger size={"icon-lg"} />
           {items.map((item, index) => (
             <>
               {item.title == "" ? (

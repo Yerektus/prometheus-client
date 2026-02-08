@@ -2,6 +2,7 @@ import { paths } from "./paths";
 
 const pageNames: Record<string, string> = {
   [paths.getSensorsPath()]: "Датчики",
+  [paths.getUsersPath()]: "Пользователи",
   [paths.getSensorReadingsPath()]: "Мониторинг показаний датчиков",
 };
 

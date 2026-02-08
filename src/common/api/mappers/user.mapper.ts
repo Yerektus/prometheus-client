@@ -11,5 +11,6 @@ export const mapUserResponseToUser = (response: UserResponse): User => {
     lastName: response.last_name,
     phoneNumbers: response.phone_numbers,
     roles: response.roles?.map((role) => mapRoleResponseToRole(role)),
+    fireSensorIds: response.fire_sensor_ids ?? [],
   };
 };

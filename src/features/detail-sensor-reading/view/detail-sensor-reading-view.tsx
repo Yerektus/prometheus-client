@@ -1,19 +1,9 @@
-import { AlertTriangle } from "lucide-react";
-import { Badge } from "@/common/components/ui/badge";
 import { Button } from "@/common/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/common/components/ui/card";
 import {
   Alert,
   AlertDescription,
   AlertTitle,
 } from "@/common/components/ui/alert";
-import { dateTimeFormatter } from "@/common/utils/date-time-formatter";
-import { Separator } from "@/common/components/ui/separator";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import { fetchSensorReadingById } from "@/common/api/requests/sensor-reading/fetch-sensor-reading";

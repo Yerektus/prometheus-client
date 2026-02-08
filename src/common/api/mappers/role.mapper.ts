@@ -3,6 +3,7 @@ import { RoleResponse } from "../responses/role.response";
 
 export const mapRoleResponseToRole = (response: RoleResponse): Role => {
   return {
+    id: response.id,
     name: response.name,
     description: response.description,
   };
