@@ -21,7 +21,7 @@ export const UsersCell = ({ users, visibleCount }: UsersCellProps) => {
       ))}
       {hidden.length > 0 && (
         <Popover>
-          <PopoverTrigger asChild>
+          <PopoverTrigger>
             <Button variant="outline">+{hidden.length}</Button>
           </PopoverTrigger>
           <PopoverContent>

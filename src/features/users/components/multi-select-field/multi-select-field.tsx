@@ -53,7 +53,7 @@ export const MultiSelectField = ({
 
   return (
     <Popover>
-      <PopoverTrigger asChild>
+      <PopoverTrigger>
         <Button
           id={id}
           type="button"

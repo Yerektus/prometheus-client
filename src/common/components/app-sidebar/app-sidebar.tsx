@@ -51,7 +51,7 @@ export function AppSidebar() {
   };
 
   return (
-    <Sidebar collapsible="offcanvas" variant="floating" overlay>
+    <Sidebar collapsible="offcanvas" variant="sidebar" overlay>
       <SidebarHeader className="p-2">
         <div className="flex justify-end">
           <Button

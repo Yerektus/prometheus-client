@@ -10,10 +10,10 @@ import Map from "react-map-gl/maplibre";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { DetailSensorReadingProps } from "./detail-sensor-reading.types";
 import { dateTimeFormatter } from "@/common/utils/date-time-formatter";
-import { ReadingLevel, THRESHOLDS } from "../reading-row/reading-row.types";
 import { ReadingRow } from "../reading-row/reading-row";
-import { LocationRow } from "../location-row/location-row";
+import { LocationRow } from "@/common/components/location-row/location-row";
 import { DetailSensorReadingEmpty } from "../detail-sensor-reading-empty/detail-sensor-reading-empty";
+import { ReadingLevel, THRESHOLDS } from "@/common/constants/readings";
 
 function getTemperatureLevel(value: number): ReadingLevel {
   return value > THRESHOLDS.temperatureCWarningAbove ? "warning" : "ok";

@@ -350,7 +350,7 @@ export const AddFireSensorDialog = ({
           </div>
         </form>
         <DialogFooter>
-          <DialogClose asChild>
+          <DialogClose>
             <Button variant="outline">Отмена</Button>
           </DialogClose>
           <Button

@@ -16,7 +16,11 @@ export const CommonHeader = () => {
     <header className="flex h-14 shrink-0 items-center gap-2 border-b px-4">
       <Breadcrumb>
         <BreadcrumbList>
-          <SidebarTrigger size={"icon-lg"} />
+          <SidebarTrigger
+            size={"icon-lg"}
+            variant={"outline"}
+            className={"mr-3"}
+          />
           {items.map((item, index) => (
             <>
               {item.title == "" ? (
