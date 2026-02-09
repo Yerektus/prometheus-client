@@ -12,25 +12,12 @@ import {
   TabsTrigger,
 } from "@/common/components/ui/tabs";
 import { DetailFireSensorTabsProps } from "./detail-fire-sensos-table.types";
-import { SensorReadingsTable } from "@/features/sensor-readings/components/sensor-readings-table/sensor-readings-table";
-import { useMemo } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { fetchFireSensorsWithReadings } from "@/common/api/requests/fire-sensors/fetch-fire-sensors-readings";
-import { mapSensorReadingsToColumns } from "@/common/api/mappers/sensor-readings-columns.mapper";
+import { ReadingsTabContent } from "../readings-tab-content/readings-tab-content";
+import { UsersTabContent } from "../users-tab-content/users-tab-content";
 
 export const DetailFireSensorTabs = ({ data }: DetailFireSensorTabsProps) => {
-  const { data: readings } = useQuery({
-    queryKey: ["fire-sensor-with-readings"],
-    queryFn: fetchFireSensorsWithReadings,
-    retry: false,
-  });
-
-  const fireSensorWithReadings = useMemo(
-    () =>
-      readings?.map((fireSensor) => mapSensorReadingsToColumns(fireSensor)) ??
-      [],
-    [readings],
-  );
+  const users = data.location?.users ?? [];
+  const sensorReadings = data.sensorReadings ?? [];
 
   return (
     <Card className="rounded-xl border-border/70">
@@ -42,19 +29,24 @@ export const DetailFireSensorTabs = ({ data }: DetailFireSensorTabsProps) => {
       </CardHeader>
 
       <CardContent className="w-full">
-        <Tabs defaultValue="readings" className={"flex flex-col"}>
+        <Tabs defaultValue="readings" className="flex flex-col">
           <TabsList>
             <TabsTrigger value="readings">Показания</TabsTrigger>
-            <TabsTrigger value="users">
-              Пользователи {data.location?.users.length}
+            <TabsTrigger value="users" className="group gap-2">
+              <span>Пользователи</span>
+              <span className="inline-flex min-w-5 items-center justify-center rounded-full bg-primary/15 px-1.5 py-0 text-xs font-semibold text-primary transition-colors group-data-active:bg-primary group-data-active:text-primary-foreground">
+                {users.length}
+              </span>
             </TabsTrigger>
           </TabsList>
 
           <TabsContent value="readings">
-            <SensorReadingsTable data={fireSensorWithReadings} />
+            <ReadingsTabContent sensorReadings={sensorReadings} />
           </TabsContent>
 
-          <TabsContent value="users">users</TabsContent>
+          <TabsContent value="users">
+            <UsersTabContent users={users} />
+          </TabsContent>
         </Tabs>
       </CardContent>
     </Card>

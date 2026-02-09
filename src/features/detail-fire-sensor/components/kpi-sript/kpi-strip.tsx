@@ -2,10 +2,7 @@ import { Droplets, Flame, Thermometer } from "lucide-react";
 import { KpiStripProps } from "./kpi-strip.types";
 import { KpiCard } from "../kpi-card/kpi-card";
 import { THRESHOLDS } from "@/common/constants/readings";
-
-function formatMetricValue(value: number, unit: string): string {
-  return value ? `${value} ${unit}` : "—";
-}
+import { formatMetric } from "@/common/utils/format-metric";
 
 export const KpiStrip = ({ data }: KpiStripProps) => {
   const temperature = data.sensorReadings?.length
@@ -20,7 +17,7 @@ export const KpiStrip = ({ data }: KpiStripProps) => {
     <div className="grid gap-4 md:grid-cols-3">
       <KpiCard
         title="Температура"
-        value={formatMetricValue(temperature, "°C")}
+        value={formatMetric(temperature, "°C")}
         status={
           temperature > THRESHOLDS.temperatureCWarningAbove ? "warning" : "ok"
         }
@@ -30,7 +27,7 @@ export const KpiStrip = ({ data }: KpiStripProps) => {
 
       <KpiCard
         title="Влажность"
-        value={formatMetricValue(humidity, "%")}
+        value={formatMetric(humidity, "%")}
         status={
           humidity < THRESHOLDS.humidityPctWarningBelow ||
           humidity > THRESHOLDS.humidityPctWarningAbove
@@ -43,7 +40,7 @@ export const KpiStrip = ({ data }: KpiStripProps) => {
 
       <KpiCard
         title="Газ"
-        value={formatMetricValue(gas, "ppm")}
+        value={formatMetric(gas, "ppm")}
         status={gas > THRESHOLDS.gasPpmWarningAbove ? "warning" : "ok"}
         hint={`Порог предупреждения: > ${THRESHOLDS.gasPpmWarningAbove} ppm`}
         icon={<Flame className="h-4 w-4" />}

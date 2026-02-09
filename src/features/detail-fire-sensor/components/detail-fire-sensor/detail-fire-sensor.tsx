@@ -12,6 +12,7 @@ import { DetailFireSensorInfo } from "../detail-fire-sesnor-info/detail-fire-sen
 import { HeroSection } from "../hero-section/hero-section";
 import { KpiStrip } from "../kpi-sript/kpi-strip";
 import { DetailFireSensorTabs } from "../detail-fire-sensor-tabs/detail-fire-sensors-tabs";
+import { ReadingsChart } from "../reading-charts/readings-chart";
 
 type SectionRevealProps = {
   children: React.ReactNode;
@@ -68,13 +69,17 @@ export function DetailFireSensor({
         </SectionReveal>
 
         <div className="grid gap-6 lg:grid-cols-[320px_minmax(0,1fr)] xl:grid-cols-[360px_minmax(0,1fr)] lg:items-start">
-          <SectionReveal className="lg:sticky lg:top-24" delay={0}>
+          <SectionReveal className="lg:sticky lg:top-16" delay={0}>
             <DetailFireSensorInfo data={data} />
           </SectionReveal>
 
           <div className="space-y-6">
             <SectionReveal delay={80}>
               <KpiStrip data={data} />
+            </SectionReveal>
+
+            <SectionReveal delay={100}>
+              <ReadingsChart sensorReadings={data.sensorReadings} />
             </SectionReveal>
 
             <SectionReveal delay={120}>

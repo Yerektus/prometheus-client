@@ -13,6 +13,7 @@ import {
 import { PanelRightOpen } from "lucide-react";
 import { Button } from "@/common/components/ui/button";
 import { DataTable } from "@/common/components/data-table/data-table";
+import { UserInitials } from "@/common/components/user-initials/user-initials";
 import { RolesCell } from "../roles-cell/roles-cell";
 import { SensorsCell } from "../sensors-cell/sensors-cell";
 import { UpdateUserSheet } from "../update-user-sheet/update-user-sheet";
@@ -43,8 +44,15 @@ const getColumns = ({
         </Button>
       ),
       cell: ({ row }) => (
-        <div className="relative">
-          <span>{row.getValue("fullName") as string}</span>
+        <div className="relative flex items-center gap-2 pr-24">
+          <UserInitials
+            fullName={row.original.fullName}
+            fallback={row.original.username}
+            className="h-8 w-8 text-xs"
+          />
+          <span className="truncate">
+            {(row.getValue("fullName") as string) || row.original.username || "—"}
+          </span>
           <Button
             className="absolute right-1 top-1/2 pointer-events-none -translate-y-1/2 rounded-sm opacity-0 group-hover:pointer-events-auto group-hover:opacity-100"
             variant="outline"
