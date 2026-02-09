@@ -44,14 +44,15 @@ const getColumns = ({
         </Button>
       ),
       cell: ({ row }) => (
-        <div className="relative flex items-center gap-2 pr-24">
+        <div className="relative flex items-center gap-2">
           <UserInitials
             fullName={row.original.fullName}
             fallback={row.original.username}
-            className="h-8 w-8 text-xs"
           />
           <span className="truncate">
-            {(row.getValue("fullName") as string) || row.original.username || "—"}
+            {(row.getValue("fullName") as string) ||
+              row.original.username ||
+              "—"}
           </span>
           <Button
             className="absolute right-1 top-1/2 pointer-events-none -translate-y-1/2 rounded-sm opacity-0 group-hover:pointer-events-auto group-hover:opacity-100"
@@ -132,9 +133,6 @@ const getColumns = ({
       ),
       cell: ({ row }) => (
         <div className="flex items-center gap-2">
-          <span className="text-xs text-muted-foreground">
-            {row.original.sensorsCount}
-          </span>
           <SensorsCell
             serialNumbers={row.original.sensorSerialNumbers}
             visibleCount={2}
@@ -150,6 +148,7 @@ export const UsersTable = ({
   refetch,
   sensorOptions,
 }: UsersTableProps) => {
+  console.log(data);
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     [],

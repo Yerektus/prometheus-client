@@ -27,6 +27,10 @@ export const routes: RouteObject[] = [
         element: <NavigationLayout />,
         children: [
           {
+            path: "/dashboard/users",
+            element: <UsersView />,
+          },
+          {
             path: "/dashboard/sensors",
             element: <FireSensorsView />,
           },
@@ -37,10 +41,6 @@ export const routes: RouteObject[] = [
           {
             path: "/dashboard/sensor-readings",
             element: <SensorReadingsView />,
-          },
-          {
-            path: "/dashboard/users",
-            element: <UsersView />,
           },
           {
             path: "/dashboard/sensor-readings/:sensorReadingId",

@@ -22,6 +22,11 @@ const items = [
     icon: Home,
   },
   {
+    title: "Пользователи",
+    url: paths.getUsersPath(),
+    icon: Users,
+  },
+  {
     title: "Датчики",
     url: paths.getSensorsPath(),
     icon: BrickWallFire,
@@ -30,11 +35,6 @@ const items = [
     title: "Мониторинг",
     url: paths.getSensorReadingsPath(),
     icon: Eye,
-  },
-  {
-    title: "Пользователи",
-    url: paths.getUsersPath(),
-    icon: Users,
   },
 ];
 

@@ -1,3 +1,5 @@
+import { FireSensor } from "./fire-sensor";
+import { Location } from "./location";
 import { Role } from "./role";
 
 export interface User {
@@ -8,5 +10,5 @@ export interface User {
   lastName: string;
   phoneNumbers: string;
   roles?: Role[];
-  fireSensorIds?: string[];
+  locations?: Location[];
 }

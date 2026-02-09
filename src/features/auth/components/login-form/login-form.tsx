@@ -64,10 +64,7 @@ export const LoginForm = () => {
     <div className="flex flex-col gap-6">
       <Card>
         <CardHeader>
-          <CardTitle>Login to your account</CardTitle>
-          <CardDescription>
-            Enter your email below to login to your account
-          </CardDescription>
+          <CardTitle>Войдите в свою учетную запись</CardTitle>
         </CardHeader>
         <CardContent>
           <form id="login-form" onSubmit={form.handleSubmit(onSubmit)}>
@@ -77,7 +74,7 @@ export const LoginForm = () => {
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="email">Email</FieldLabel>
+                    <FieldLabel htmlFor="email">Почта</FieldLabel>
                     <Input
                       {...field}
                       id="email"
@@ -96,7 +93,7 @@ export const LoginForm = () => {
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="password">Password</FieldLabel>
+                    <FieldLabel htmlFor="password">Пароль</FieldLabel>
                     <Input
                       {...field}
                       id="password"
@@ -113,7 +110,7 @@ export const LoginForm = () => {
               />
               <Field>
                 <Button type="submit" form="login-form">
-                  Login
+                  Войти
                 </Button>
               </Field>
             </FieldGroup>

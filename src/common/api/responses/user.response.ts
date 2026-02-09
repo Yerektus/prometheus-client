@@ -1,4 +1,5 @@
 import { RoleResponse } from "./role.response";
+import { LocationResponse } from "./location.response";
 
 export interface UserResponse {
   id: string;
@@ -8,5 +9,5 @@ export interface UserResponse {
   last_name: string;
   phone_numbers: string;
   roles?: RoleResponse[];
-  fire_sensor_ids?: string[];
+  locations?: LocationResponse[];
 }

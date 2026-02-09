@@ -1,7 +1,6 @@
 import { useEffect, useMemo } from "react";
 import { useLocation } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { fetchUsers } from "@/common/api/requests/users/fetch-users";
 import { fetchFireSensors } from "@/common/api/requests/fire-sensors/fetch-fire-sensors";
 import { usePageHeader } from "@/common/hooks/use-page-header";
 import { UsersTable } from "../components/users-table/users-table";
@@ -9,6 +8,7 @@ import {
   SensorOption,
   UsersTableRow,
 } from "../components/users-table/users-table.types";
+import { fetchUsersWithFireSensors } from "@/common/api/requests/users/fetch-users-with-fire-sensors";
 
 const getFullName = (firstName: string, lastName: string) => {
   const fullName = [lastName, firstName]
@@ -25,7 +25,7 @@ export const UsersView = () => {
 
   const { data: users = [], refetch } = useQuery({
     queryKey: ["users"],
-    queryFn: fetchUsers,
+    queryFn: fetchUsersWithFireSensors,
     retry: false,
   });
 
@@ -34,17 +34,6 @@ export const UsersView = () => {
     queryFn: fetchFireSensors,
     retry: false,
   });
-
-  const sensorSerialById = useMemo(
-    () =>
-      new Map(
-        fireSensors.map((sensor) => [
-          sensor.id,
-          sensor.serialNumber ?? sensor.id,
-        ]),
-      ),
-    [fireSensors],
-  );
 
   const sensorOptions = useMemo<SensorOption[]>(
     () =>
@@ -60,11 +49,33 @@ export const UsersView = () => {
   const usersTableData = useMemo<UsersTableRow[]>(
     () =>
       users.map((user) => {
+        console.log(user);
         const fullName = getFullName(user.firstName, user.lastName);
-        const fireSensorIds = user.fireSensorIds ?? [];
-        const sensorSerialNumbers = fireSensorIds.map(
-          (sensorId) => sensorSerialById.get(sensorId) ?? sensorId,
-        );
+        let fireSensorIds = [] as string[];
+        user.locations?.forEach((location) => {
+          if (!location.fireSensors) return;
+          console.log(
+            ...location.fireSensors.map((fireSensor) => fireSensor.id),
+          );
+          fireSensorIds.push(
+            ...location.fireSensors.map((fireSensor) => fireSensor.id),
+          );
+        });
+        console.log(fireSensorIds);
+        let sensorSerialNumbers = [] as string[];
+        user.locations?.forEach((location) => {
+          if (!location.fireSensors) return;
+          sensorSerialNumbers.push(
+            ...location.fireSensors.map(
+              (fireSensor) => fireSensor.serialNumber,
+            ),
+          );
+        });
+        let sensorsCount = 0;
+        user.locations?.forEach((location) => {
+          if (!location.fireSensors) return;
+          location.fireSensors.forEach(() => ++sensorsCount);
+        });
 
         return {
           id: user.id,
@@ -73,14 +84,14 @@ export const UsersView = () => {
           email: user.email,
           phoneNumbers: user.phoneNumbers,
           roles: user.roles?.map((role) => role.name) ?? [],
-          fireSensorIds,
-          sensorSerialNumbers,
-          sensorsCount: sensorSerialNumbers.length,
+          fireSensorIds: fireSensorIds,
+          sensorSerialNumbers: sensorSerialNumbers,
+          sensorsCount: sensorsCount,
           search: `${fullName} ${user.username}`.toLowerCase(),
           user,
         };
       }),
-    [sensorSerialById, users],
+    [users],
   );
 
   useEffect(() => {

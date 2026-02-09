@@ -28,7 +28,7 @@ export const SensorsCell = ({
       ))}
       {hidden.length > 0 && (
         <Popover>
-          <PopoverTrigger asChild>
+          <PopoverTrigger>
             <Button variant="outline">+{hidden.length}</Button>
           </PopoverTrigger>
           <PopoverContent className="w-64">

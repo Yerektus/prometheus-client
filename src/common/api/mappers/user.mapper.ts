@@ -1,6 +1,7 @@
 import { User } from "@/common/entities/user";
 import { UserResponse } from "../responses/user.response";
 import { mapRoleResponseToRole } from "./role.mapper";
+import { mapLocationResponseToLocation } from "./location.mapper";
 
 export const mapUserResponseToUser = (response: UserResponse): User => {
   return {
@@ -11,6 +12,8 @@ export const mapUserResponseToUser = (response: UserResponse): User => {
     lastName: response.last_name,
     phoneNumbers: response.phone_numbers,
     roles: response.roles?.map((role) => mapRoleResponseToRole(role)),
-    fireSensorIds: response.fire_sensor_ids ?? [],
+    locations: response.locations?.map((location) =>
+      mapLocationResponseToLocation(location),
+    ),
   };
 };
